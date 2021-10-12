@@ -1,0 +1,12 @@
+.container
+  .card
+    .card-body
+      %h4.text-primary Login
+      = simple_form_for @user, url: login_page_path() do |f|
+        .form-inputs
+          = f.input :email
+          = f.input :password
+        %h6.text-danger #{alert}
+        .form-actions
+          = f.button :submit, "Log in", class: "btn btn-primary"
+          %a{class: "btn btn-outline-info", role:"button", href: "#{register_page_path()}"}Register

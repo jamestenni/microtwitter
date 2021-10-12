@@ -1,3 +1,14 @@
 Rails.application.routes.draw do
+  get 'main', to: 'main#loginpage', as: 'login_page'
+  post 'main', to: 'main#checklogin'
+
+  get 'register', to: 'main#registerpage', as: 'register_page'
+
+  get 'feed', to: 'account#feedpage', as: 'feed_page'
+  delete 'logout', to: 'account#logout', as: 'logout'
+
+  resources :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+
 end
