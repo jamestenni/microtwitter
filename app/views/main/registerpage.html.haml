@@ -1,1 +1,17 @@
-%h1 registerpage la
+.container
+  .card
+    .card-header.bg-primary.bg-gradient
+      %h5.text-light Register
+    .card-body 
+      %h6 Let's join our microtwitter world!
+      = simple_form_for @user, url: register_path() do |f|
+        = f.error_notification message: "Some input(s) don't match the rules"
+        .form-inputs
+          = f.input :name
+          = f.input :email, placeholder: "example: test@hotmail.com"
+          = f.input :password, input_html: {value: @user.password}
+          .form-text must contain at least 6 characters
+
+        .form-actions.mt-3
+          = f.button :submit, "Register", class: "btn btn-primary"
+          %a{class: "btn btn-outline-secondary", role:"button", href: "#{login_page_path()}"}Cancel

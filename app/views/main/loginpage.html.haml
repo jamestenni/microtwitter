@@ -6,7 +6,8 @@
         .form-inputs
           = f.input :email
           = f.input :password
-        %h6.text-danger #{alert}
-        .form-actions
+        %h6.text-danger.mt-3 #{alert}
+        %h6.text-success.mt-3 #{notice}
+        .form-action.mt-4
           = f.button :submit, "Log in", class: "btn btn-primary"
           %a{class: "btn btn-outline-info", role:"button", href: "#{register_page_path()}"}Register

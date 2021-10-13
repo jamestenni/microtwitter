@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   post 'main', to: 'main#checklogin'
 
   get 'register', to: 'main#registerpage', as: 'register_page'
+  post 'register', to: 'main#registration'
 
   get 'feed', to: 'account#feedpage', as: 'feed_page'
   delete 'logout', to: 'account#logout', as: 'logout'

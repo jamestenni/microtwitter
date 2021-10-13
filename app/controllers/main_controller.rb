@@ -28,10 +28,27 @@ class MainController < ApplicationController
   
   end
 
+  def registration
+    @user = User.new(user_params)
+    @user.name = params[:user][:name]
+    @user.email = params[:user][:email]
+    @user.password = params[:user][:password]
+
+    if @user.save #registration completed
+      redirect_to login_page_path, notice: "Registration completed! Now you can login to our microtwitter world!"
+    else #registration failed / invalid input
+      render :registerpage
+    end
+  end
+
 
   private
     def initialize_new_user
-      @user = User.new;
+      @user = User.new();
+    end
+
+    def user_params
+      params.require(:user).permit(:name, :email, :password)
     end
 
 end
