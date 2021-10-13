@@ -1,2 +1,27 @@
 = render "navigation"
 
+.container-fluid
+  .row 
+    .col-9 
+      - if @posts.length != 0
+        - @posts.each do |p|
+          - pname = User.find(p.user_id).name
+          .card.mb-3
+            - if p.user_id == @user.id
+              .card-header.bg-info.bg-opacity-15.bg-gradient
+                = link_to pname, profile_page_path(pname), class: "fs-5"
+            - else
+              .card-header
+                = link_to pname, profile_page_path(pname), class: "fs-5"
+            .card-body
+              %h6 
+                = p.msg 
+            .card-footer.text-muted
+              = p.created_at
+      - if @posts.length == 0
+        .card
+          .card-body{style: "text-align: center;"}
+            %h6 You don't have any feed today, try explore our twitter world and follow someone!
+    .col
+      %div.mt-3
+        %a.btn.btn-success{href: "#{create_post_page_path()}" ,style: "width: 100%; color: white;" ,role: "button"} Create Post

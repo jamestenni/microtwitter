@@ -7,9 +7,14 @@
     .col-9
       - if @post.length != 0
         - @post.each do |p|
+          - pname = User.find(p.user_id).name
           .card.mb-3
-            .card-header
-              = link_to @user_profile.name, profile_page_path(@user_profile.name)
+            - if p.user_id == @user.id
+              .card-header.bg-info.bg-opacity-15.bg-gradient
+                = link_to pname, profile_page_path(pname), class: "fs-5"
+            - else
+              .card-header
+                = link_to pname, profile_page_path(pname), class: "fs-5"
             .card-body
               %h6 
                 = p.msg 
