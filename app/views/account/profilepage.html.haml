@@ -1,7 +1,48 @@
 = render "navigation"
 
-%h1 THIS IS PROFILE PAGE
-%h1 NAME = #{params[:name]}
+-# %p THIS IS PROFILE PAGE
+-# %p NAME = #{params[:name]}
 
-.container-fluid 
-  hello
+.container-fluid
+  .row 
+    .col-9
+      - if @post.length != 0
+        - @post.each do |p|
+          .card.mb-3
+            .card-header
+              = link_to @user_profile.name, profile_page_path(@user_profile.name)
+            .card-body
+              %h6 
+                = p.msg 
+            .card-footer.text-muted
+              = p.created_at
+      - if @post.length == 0
+        .card
+          .card-body{style: "text-align: center;"}
+            %h6 #{@user_profile.name} has currently no posts.
+
+    .col
+      //profile card
+      .card
+        .card-header.bg-primary.bg-gradient{style: "width: 100%;"}
+          %h5.text-light 
+            = @user_profile.name
+        .card-body 
+          .row
+            .col 
+              %h6{style: "font-weight: bold; text-align: center;"} 
+                = @post.length
+              %h6{style: "text-align: center;"} posts
+            .col 
+              %h6{style: "font-weight: bold; text-align: center;"} 999
+              %h6{style: "text-align: center;"} followers
+            .col
+              %h6{style: "font-weight: bold; text-align: center;"} 999
+              %h6{style: "text-align: center;"} following
+          .row.mt-2
+            - if !@isMyself
+              %div.mt-2
+                %button.btn.btn-info{style: "width: 100%;"} Follow
+      - if @isMyself
+        %div.mt-3
+          %a.btn.btn-success{href: "#{create_post_page_path()}" ,style: "width: 100%; color: white;" ,role: "button"} Create Post

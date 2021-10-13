@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :posts
   get 'main', to: 'main#loginpage', as: 'login_page'
   post 'main', to: 'main#checklogin'
 
@@ -7,6 +8,8 @@ Rails.application.routes.draw do
 
   get 'feed', to: 'account#feedpage', as: 'feed_page'
   get 'profile/:name', to: 'account#profilepage', as: 'profile_page'
+
+  get 'post/create', to: 'account#createpostpage', as: 'create_post_page'
 
   post 'logout', to: 'account#logout', as: 'logout'
 

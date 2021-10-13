@@ -9,17 +9,22 @@
           %a.nav-link{"aria-current" => "page", :href => "#{feed_page_path()}"} Home
         %li.nav-item
           %a.nav-link{:href => "#{profile_page_path(name: @user.name)}"} Profile
-        %li.nav-item.dropdown
-          %a#navbarDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", :href => "#", :role => "button"}
-            Dropdown
-          %ul.dropdown-menu{"aria-labelledby" => "navbarDropdown"}
-            %li
-              %a.dropdown-item{:href => "#"} Action
-            %li
-              %a.dropdown-item{:href => "#"} Another action
-            %li
-              %hr.dropdown-divider/
-            %li
-              %a.dropdown-item{:href => "#"} Something else here
-      %span
+        %li.nav-item
+          %a.nav-link{:href => "#{create_post_page_path()}"} Create Post
+        -# %li.nav-item.dropdown
+        -#   %a#navbarDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", :href => "#", :role => "button"}
+        -#     Dropdown
+        -#   %ul.dropdown-menu{"aria-labelledby" => "navbarDropdown"}
+        -#     %li
+        -#       %a.dropdown-item{:href => "#"} Action
+        -#     %li
+        -#       %a.dropdown-item{:href => "#"} Another action
+        -#     %li
+        -#       %hr.dropdown-divider/
+        -#     %li
+        -#       %a.dropdown-item{:href => "#"} Something else here
+      %div.me-3.p-2{style: "background-color: #c6e2e9;"}
+        You are logging in as: 
+        %strong #{@user.name}
+      %span.mx-1
         = button_to 'Log out', logout_path, method: "post", class: "btn btn-danger btn-sm"
