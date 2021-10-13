@@ -33,15 +33,21 @@
                 = @post.length
               %h6{style: "text-align: center;"} posts
             .col 
-              %h6{style: "font-weight: bold; text-align: center;"} 999
+              %h6{style: "font-weight: bold; text-align: center;"}
+                = @follower.length
               %h6{style: "text-align: center;"} followers
             .col
-              %h6{style: "font-weight: bold; text-align: center;"} 999
+              %h6{style: "font-weight: bold; text-align: center;"}
+                = @following.length
               %h6{style: "text-align: center;"} following
           .row.mt-2
-            - if !@isMyself
+            - if !@isMyself and @follow_enable
               %div.mt-2
-                %button.btn.btn-info{style: "width: 100%;"} Follow
+              = button_to 'Follow', create_follow_path(followee_user_id: @user_profile.id, follower_user_id: @user.id), class: "btn btn-info", style: "width: 100%;"
+            - if !@isMyself and !@follow_enable
+              %div.mt-2
+              = button_to 'Unfollow', remove_follow_path(followee_user_id: @user_profile.id, follower_user_id: @user.id), class: "btn btn-outline-info", style: "width: 100%;"
+            
       - if @isMyself
         %div.mt-3
           %a.btn.btn-success{href: "#{create_post_page_path()}" ,style: "width: 100%; color: white;" ,role: "button"} Create Post

@@ -13,4 +13,4 @@
           = f.input :msg, :as => :text, :input_html => {:rows => 5}
         .form-actions.mt-3
           = f.button :submit, "Post", class: "btn btn-success"
-          %a{class: "btn btn-outline-secondary", role:"button", href: "#{profile_page_path(name: @user.name)}"}Cancel
+          %a{class: "btn btn-outline-secondary", role:"button", href: "#{feed_page_path()}"}Cancel

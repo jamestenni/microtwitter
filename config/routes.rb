@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :follows
   resources :posts
   get 'main', to: 'main#loginpage', as: 'login_page'
   post 'main', to: 'main#checklogin'
@@ -11,6 +12,9 @@ Rails.application.routes.draw do
 
   get 'post/create', to: 'account#createpostpage', as: 'create_post_page'
   post 'post/create', to: 'account#createpost'
+
+  post 'follow', to: 'account#createfollow', as: 'create_follow'
+  post 'unfollow', to: 'account#removefollow', as: 'remove_follow'
 
   post 'logout', to: 'account#logout', as: 'logout'
 

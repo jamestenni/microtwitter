@@ -6,4 +6,7 @@ class User < ApplicationRecord
   has_secure_password
 
   has_many :posts
+
+  has_many :follower_users, class_name: 'follow', foreign_key: 'follower_user_id'
+  has_many :followee_users, class_name: 'follow', foreign_key: 'followee_user_id'
 end

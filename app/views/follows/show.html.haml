@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Follower user:
+  = @follow.follower_user
+%p
+  %b Followee user:
+  = @follow.followee_user
+
+= link_to 'Edit', edit_follow_path(@follow)
+\|
+= link_to 'Back', follows_path
