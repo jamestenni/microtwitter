@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   post 'register', to: 'main#registration'
 
   get 'feed', to: 'account#feedpage', as: 'feed_page'
-  delete 'logout', to: 'account#logout', as: 'logout'
+  get 'profile/:name', to: 'account#profilepage', as: 'profile_page'
+
+  post 'logout', to: 'account#logout', as: 'logout'
 
   resources :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

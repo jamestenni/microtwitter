@@ -1,5 +1,7 @@
-%h1 Welcome to feed page
-%h2 User id = #{session[:user_id]}
-%h3 User email = #{@user.email}
+= render "navigation"
 
-= button_to 'Logout', logout_path(), method: "delete", class: "btn btn-light"
+.container
+  %h1 Welcome to feed page
+  %h2 User name = #{@user.name}
+  %h2 User id = #{session[:user_id]}
+  %h3 User email = #{@user.email}
