@@ -1,3 +1,16 @@
 = render "navigation"
 
-%h1 CREATE POST PAGE KRUB LUL
+.container 
+  .card
+    .card-header.bg-success.bg-gradient.bg-opacity-50
+      What do you think today?, 
+      %strong #{@user.name}
+    .card-body
+      = simple_form_for @post, url: post_create_path() do |f|
+        = f.error_notification message: "Message can't be blank!"
+        .form-inputs 
+          = f.input :user_id, :as => :hidden, :input_html => {:value => "#{@user.id}"}
+          = f.input :msg, :as => :text, :input_html => {:rows => 5}
+        .form-actions.mt-3
+          = f.button :submit, "Post", class: "btn btn-success"
+          %a{class: "btn btn-outline-secondary", role:"button", href: "#{profile_page_path(name: @user.name)}"}Cancel

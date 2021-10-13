@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'profile/:name', to: 'account#profilepage', as: 'profile_page'
 
   get 'post/create', to: 'account#createpostpage', as: 'create_post_page'
+  post 'post/create', to: 'account#createpost'
 
   post 'logout', to: 'account#logout', as: 'logout'
 

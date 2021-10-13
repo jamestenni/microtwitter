@@ -1,9 +1,8 @@
 = render "navigation"
 
--# %p THIS IS PROFILE PAGE
--# %p NAME = #{params[:name]}
-
 .container-fluid
+  %h6.text-success.mt-3 #{notice}
+
   .row 
     .col-9
       - if @post.length != 0
