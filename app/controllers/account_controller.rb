@@ -6,7 +6,6 @@ class AccountController < ApplicationController
   def feedpage
     @following = Follow.where(follower_user_id: @user.id)
     @posts = []
-    @posts.concat(@user.posts)
     @following.each do |f|
       @posts.concat(User.find(f.followee_user_id).posts)
     end
