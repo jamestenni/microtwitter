@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :likes
   resources :follows
   resources :posts
   get 'main', to: 'main#loginpage', as: 'login_page'
@@ -15,6 +16,9 @@ Rails.application.routes.draw do
 
   post 'follow', to: 'account#createfollow', as: 'create_follow'
   post 'unfollow', to: 'account#removefollow', as: 'remove_follow'
+
+  post 'like', to: 'likes#createlike', as: 'create_like'
+  post 'unlike', to: 'likes#removelike', as: 'remove_like'
 
   post 'logout', to: 'account#logout', as: 'logout'
 

@@ -1,22 +1,14 @@
 = render "navigation"
 
-.container-fluid
+.container
   %h6.text-success.mt-3 #{notice}
 
   .row 
     .col-9
-      - if @post.length != 0
-        - @post.each do |p|
-          - pname = User.find(p.user_id).name
-          .card.mb-3
-            .card-header
-              = link_to pname, profile_page_path(pname), class: "fs-5"
-            .card-body
-              %h6 
-                = p.msg 
-            .card-footer.text-muted
-              = p.created_at
-      - if @post.length == 0
+      - if @posts.length != 0
+        - @posts.each do |p|
+          = render "post", post: p
+      - if @posts.length == 0
         .card
           .card-body{style: "text-align: center;"}
             %h6 #{@user_profile.name} has currently no posts.
@@ -31,7 +23,7 @@
           .row
             .col 
               %h6{style: "font-weight: bold; text-align: center;"} 
-                = @post.length
+                = @posts.length
               %h6{style: "text-align: center;"} posts
             .col 
               %h6{style: "font-weight: bold; text-align: center;"}

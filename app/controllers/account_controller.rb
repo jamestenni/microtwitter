@@ -1,21 +1,15 @@
 class AccountController < ApplicationController
   include SessionConcern 
   before_action :is_logged_in, only: %i[feedpage profilepage createpostpage createpost createfollow removefollow]
-  before_action :set_user, only: %i[feedpage profilepage createpostpage createpost]
+  before_action :set_user, only: %i[feedpage profilepage createpostpage createpost createfollow removefollow]
 
   def feedpage
-    @following = Follow.where(follower_user_id: @user.id)
-    @posts = []
-    @following.each do |f|
-      @posts.concat(User.find(f.followee_user_id).posts)
-    end
-    @posts.sort_by!(&:created_at)
-    @posts.reverse!()
+    @posts = @user.get_feed_posts
   end
 
   def profilepage
     @user_profile = User.find_by(name: params[:name])
-    @post = @user_profile.posts.reverse()
+    @posts = @user_profile.posts.reverse()
     @follower = Follow.where(followee_user_id: @user_profile.id)
     @following = Follow.where(follower_user_id: @user_profile.id)
 

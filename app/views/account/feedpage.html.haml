@@ -1,19 +1,11 @@
 = render "navigation"
 
-.container-fluid
+.container
   .row 
     .col-9 
       - if @posts.length != 0
         - @posts.each do |p|
-          - pname = User.find(p.user_id).name
-          .card.mb-3
-            .card-header
-              = link_to pname, profile_page_path(pname), class: "fs-5"
-            .card-body
-              %h6 
-                = p.msg 
-            .card-footer.text-muted
-              = p.created_at
+          = render "post", post: p
       - if @posts.length == 0
         .card
           .card-body{style: "text-align: center;"}

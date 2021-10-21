@@ -1,0 +1,25 @@
+- pname = User.find(post.user_id).name
+.card.mb-4
+  .card-header
+    .d-flex.flex-row.justify-content-xxl-between
+      .flex-grow-1.align-self-center
+        .div.d-flex.flex
+          = link_to pname, profile_page_path(pname), class: "fs-4 align-self-center", style: "text-decoration: none;"
+          %div{class:"ms-5 fs-6 align-self-center"}
+            = pluralize(post.get_liked_users.length, 'like')
+          %div{class:"ms-3 align-self-center"}
+            - if !post.get_liked_users.include?(@user)
+              = button_to 'Like', create_like_path(user_id: @user.id, post_id: post.id), class: "btn btn-primary"
+            - else
+              = button_to 'Unlike', remove_like_path(user_id: @user.id, post_id: post.id), class: "btn btn-outline-primary"
+      %p{class: "mt-2"} #{post.created_at}
+  .card-body
+    %h6 
+      = post.msg 
+  .card-footer.text-muted
+    - if post.get_liked_users.length == 0
+      %div No one has liked this post yet.
+    - else
+      %p.bg-info.bg-gradient.p-1.me-3{style: "display: inline; color: black"} Liked by:
+      - post.get_liked_users.each do |u|
+        = link_to u.name, profile_page_path(name: u.name), class: "fs-6 me-2", style: "text-decoration: none;"
