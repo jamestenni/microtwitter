@@ -5,7 +5,7 @@
     .col-9 
       - if @posts.length != 0
         - @posts.each do |p|
-          = render "post", post: p
+          = render "post", post: p, isProfilePage: false
       - if @posts.length == 0
         .card
           .card-body{style: "text-align: center;"}

@@ -9,9 +9,9 @@
             = pluralize(post.get_liked_users.length, 'like')
           %div{class:"ms-3 align-self-center"}
             - if !post.get_liked_users.include?(@user)
-              = button_to 'Like', create_like_path(user_id: @user.id, post_id: post.id), class: "btn btn-primary"
+              = button_to 'Like', create_like_path(user_id: @user.id, post_id: post.id, isProfilePage: isProfilePage), class: "btn btn-primary"
             - else
-              = button_to 'Unlike', remove_like_path(user_id: @user.id, post_id: post.id), class: "btn btn-outline-primary"
+              = button_to 'Unlike', remove_like_path(user_id: @user.id, post_id: post.id, isProfilePage: isProfilePage), class: "btn btn-outline-primary"
       %p{class: "mt-2"} #{post.created_at}
   .card-body
     %h6 

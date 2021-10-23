@@ -65,21 +65,20 @@ class LikesController < ApplicationController
     @like.user = User.find(params[:user_id])
     @like.post = Post.find(params[:post_id])
     @like.save
-    
-    if (@user.id == @like.post.user.id)
-      redirect_to profile_page_path(name: @user.name)
-    else
+    if (params[:isProfilePage] == "false")
       redirect_to feed_page_path
+    else
+      redirect_to profile_page_path(name: @like.post.user.name)
     end
   end
 
   def removelike
     @like = Like.find_by(user_id: params[:user_id], post_id: params[:post_id])
     @like.destroy
-    if (@user.id == @like.post.user.id)
-      redirect_to profile_page_path(name: @user.name)
-    else
+    if (params[:isProfilePage] == "false")
       redirect_to feed_page_path
+    else
+      redirect_to profile_page_path(name: @like.post.user.name)
     end
   end
 
