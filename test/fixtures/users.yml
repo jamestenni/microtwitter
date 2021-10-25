@@ -20,3 +20,13 @@ u2:
   name: jame2
   email: test2@hotmail.com
   password_digest: <%= BCrypt::Password.create('123456') %>
+
+testlikeu1:
+  name: testlike1
+  email: testlike1@hotmail.com
+  password_digest: <%= BCrypt::Password.create('123456') %>
+
+testlikeu2:
+  name: testlike2
+  email: testlike2@hotmail.com
+  password_digest: <%= BCrypt::Password.create('123456') %>
