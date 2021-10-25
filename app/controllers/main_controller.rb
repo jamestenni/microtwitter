@@ -20,7 +20,6 @@ class MainController < ApplicationController
       #Login failed
       redirect_to login_page_path(), alert: "Your email or password is incorrect!"
     end
-
   end
 
   #Register Page -------------------------------------
