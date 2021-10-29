@@ -1,25 +1,28 @@
 - pname = User.find(post.user_id).name
-.card.mb-4
+- plikes = post.get_liked_users.length
+- liked_users = post.get_liked_users.join(" ")
+.card.mb-4{id: "Post-id#{post.id}", "likes": "#{plikes}", "liked-users": "#{liked_users}"}
   .card-header
     .d-flex.flex-row.justify-content-xxl-between
       .flex-grow-1.align-self-center
         .div.d-flex.flex
           = link_to pname, profile_page_path(pname), class: "fs-4 align-self-center", style: "text-decoration: none;"
-          %div{class:"ms-5 fs-6 align-self-center"}
-            = pluralize(post.get_liked_users.length, 'like')
-          %div{class:"ms-3 align-self-center"}
-            - if !post.get_liked_users.include?(@user)
-              = button_to 'Like', create_like_path(user_id: @user.id, post_id: post.id, isProfilePage: isProfilePage), class: "btn btn-primary"
+          %div{class:"ms-4 align-self-center"}
+            - if !post.get_liked_users.include?(@user.name)
+              = button_to 'Like', create_like_path(user_id: @user.id, post_id: post.id, isProfilePage: isProfilePage), class: "btn btn-primary btn-sm"
             - else
-              = button_to 'Unlike', remove_like_path(user_id: @user.id, post_id: post.id, isProfilePage: isProfilePage), class: "btn btn-outline-primary"
+              = button_to 'Unlike', remove_like_path(user_id: @user.id, post_id: post.id, isProfilePage: isProfilePage), class: "btn btn-outline-primary btn-sm"
       %p{class: "mt-2"} #{post.created_at}
   .card-body
     %h6 
       = post.msg 
-  .card-footer.text-muted
-    - if post.get_liked_users.length == 0
-      %div No one has liked this post yet.
-    - else
-      %p.bg-info.bg-gradient.p-1.me-3{style: "display: inline; color: black"} Liked by:
-      - post.get_liked_users.each do |u|
-        = link_to u.name, profile_page_path(name: u.name), class: "fs-6 me-2", style: "text-decoration: none;"
+  .card-footer.text-muted 
+    .div{style: "float: right;"}
+      - if plikes != 0
+        %button.btn.btn-info.btn-sm.wholikebutton{"data-bs-target":"#likeModal", "data-bs-toggle":"modal", type:"button", id:"listWhoLikePost-id#{post.id}"}
+          %svg{xmlns:"http://www.w3.org/2000/svg",width:"16",height:"16",fill:"currentColor",class:"bi bi-suit-heart-fill",viewBox:"0 0 16 16"}
+            %path{d:"M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"}
+          = pluralize(plikes, 'like')
+      - else
+        %button.btn.btn-secondary.btn-sm.wholikebutton{"data-bs-target":"#likeModal", "data-bs-toggle":"modal", type:"button", id:"listWhoLikePost-id#{post.id}"}
+          = pluralize(plikes, 'like')

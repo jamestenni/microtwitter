@@ -8,9 +8,9 @@ class Post < ApplicationRecord
   def get_liked_users
     liked_users = []
     self.likes.each do |like|
-      liked_users.push(like.user)
+      liked_users.push(like.user.name)
     end
     return liked_users
   end
-  
+
 end

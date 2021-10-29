@@ -1,0 +1,37 @@
+/ Modal
+#likeModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "likeModalLabel", :tabindex => "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %h6#likeModalLabel.modal-title
+          Total Likes:
+          %span#likeModalTotalLikes{style: "color: blue; font-weight: bold;"} ... 
+        %button.btn-close{"aria-label" => "Close", "data-bs-dismiss" => "modal", :type => "button"}
+      .modal-body
+        %ul.list-group.list-group-flush#likeModalLikedUsers      
+      .modal-footer
+        %button.btn.btn-danger{"data-bs-dismiss" => "modal", :type => "button"} Close
+
+:javascript
+  $(document).ready(function() {
+
+    $(".wholikebutton").click(function() {
+      let postid = $(this).attr("id").slice(18);
+
+      $("#likeModalTotalLikes").text(
+        $("#Post-id"+postid).attr("likes")
+      )
+    
+      let liked_users = $("#Post-id"+postid).attr("liked-users")
+      if (liked_users) {
+        let likedUsersArray = liked_users.split(" ")
+        let likedUsersElementArray = likedUsersArray.map(uname => {
+        let likedUsersElement = '<li class="list-group-item" data-bs-dismiss="modal"><h6><a style="text-decoration: none;" href="/profile/'+uname+'">'+uname+'</a></h6></li>'
+        return likedUsersElement
+      });
+        $("#likeModalLikedUsers").html(likedUsersElementArray.join("\n"))
+      } else { 
+        $("#likeModalLikedUsers").html("No one has liked this post yet. Maybe you'll the first one ^_^")
+      }
+    })
+  })
