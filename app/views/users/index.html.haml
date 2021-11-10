@@ -1,25 +1,30 @@
-%h1 Listing users
-
-%table
-  %thead
-    %tr
-      %th Name
-      %th Email
-      %th Password digest
-      %th
-      %th
-      %th
-
-  %tbody
-    - @users.each do |user|
+.container.mt-3
+  %h1 Listing users
+  %table#userTable
+    %thead
       %tr
-        %td= user.name
-        %td= user.email
-        %td= user.password_digest
-        %td= link_to 'Show', user
-        %td= link_to 'Edit', edit_user_path(user)
-        %td= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' }
+        %th Name
+        %th Email
+        %th Password digest
+        %th
+        %th
+        %th
 
-%br
+    %tbody
+      - @users.each do |user|
+        %tr
+          %td= user.name
+          %td= user.email
+          %td= user.password_digest
+          %td= link_to 'Show', user
+          %td= link_to 'Edit', edit_user_path(user)
+          %td= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' }
 
-= link_to 'New User', new_user_path
+  %br
+
+  = link_to 'New User', new_user_path
+
+:javascript
+  $(document).ready( function () {
+    $('#userTable').DataTable();
+  } );
